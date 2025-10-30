@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alumno Alumni 2023</title>
+  <link rel="icon" href="D:/AlumniSIH/frontend/alumnologo.png" type="image/png">
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f3f2ef;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+    scroll-behavior: smooth;
+  }
+
+
+    header {
+      background: #283e4a;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header span {
+      color: #ffd700;
+    }
+
+    .search-bar {
+      background: #fff;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input {
+      width: 60%;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .profile-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .profile-banner {
+      height: 80px;
+      background: linear-gradient(135deg, #283e4a, #1f2e38);
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin: -50px auto 10px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .profile-info {
+      text-align: center;
+      padding: 10px 20px 20px;
+    }
+
+    .profile-info h3 {
+      margin: 10px 0 5px;
+      font-size: 20px;
+      color: #283e4a;
+    }
+
+    .profile-info p {
+      margin: 4px 0;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .btn-connect {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: #283e4a;
+      color: #fff;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn-connect:hover {
+      background: #ffd700;
+      color: #1c1c1c;
+    }
+  </style>
+</head>
+<body>
+   <!-- Lenis -->
+  <script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    // Lenis setup
+    const lenis = new Lenis({
+      duration: 1.6,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+      smooth: true,
+      smoothTouch: true,
+      touchMultiplier: 2,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // GSAP ScrollTrigger animation
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from(".about", {
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      y: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power3.out"
+    });
+
+    gsap.from(".cta", {
+      scrollTrigger: {
+        trigger: ".cta",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      scale: 0.8,
+      opacity: 0,
+      duration: 1.5,
+      ease: "expo.out"
+    });
+  </script>
+  
+  <div class="btn-group">
+   <a href="index.html" class="btn btn-primary">Home</a>
+  </div>
+  
+  <header>
+    Alumno <span>Alumni 2023</span>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search alumni by name, company, or role...">
+  </div>
+
+  <div class="container">
+    <!-- Alumni Profiles -->
+    <div class="profile-card">
+      <div class="profile-banner"></div>
+      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Alumni" class="profile-pic">
+      <div class="profile-info">
+        <h3>Rahul Mehta</h3>
+        <p>Backend Developer @ Cognizant</p>
+        <p>B.Tech CSE • Class of 2023</p>
+        <a href="mailto:rahul@example.com" class="btn-connect">Connect</a>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-banner"></div>
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Alumni" class="profile-pic">
+      <div class="profile-info">
+        <h3>Anjali Deshmukh</h3>
+        <p>UI/UX Designer @ Infosys</p>
+        <p>B.Tech IT • Class of 2023</p>
+        <a href="mailto:anjali@example.com" class="btn-connect">Connect</a>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-banner"></div>
+      <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Alumni" class="profile-pic">
+      <div class="profile-info">
+        <h3>Vikram Yadav</h3>
+        <p>Data Scientist @ Accenture</p>
+        <p>B.Tech AI • Class of 2023</p>
+        <a href="mailto:vikram@example.com" class="btn-connect">Connect</a>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-banner"></div>
+      <img src="https://randomuser.me/api/portraits/women/70.jpg" alt="Alumni" class="profile-pic">
+      <div class="profile-info">
+        <h3>Priya Nair</h3>
+        <p>Cloud Engineer @ Microsoft</p>
+        <p>B.Tech ECE • Class of 2023</p>
+        <a href="mailto:priya@example.com" class="btn-connect">Connect</a>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-banner"></div>
+      <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Alumni" class="profile-pic">
+      <div class="profile-info">
+        <h3>Aman Kumar</h3>
+        <p>Graduate Trainee @ TCS</p>
+        <p>B.Tech Mechanical • Class of 2023</p>
+        <a href="mailto:aman@example.com" class="btn-connect">Connect</a>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-banner"></div>
+      <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Alumni" class="profile-pic">
+      <div class="profile-info">
+        <h3>Ritika Sharma</h3>
+        <p>Business Analyst @ Deloitte</p>
+        <p>B.Tech CSE • Class of 2023</p>
+        <a href="mailto:ritika@example.com" class="btn-connect">Connect</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

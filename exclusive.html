@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Premium Subscription - Alumno</title>
+  <link rel="icon" href="D:/AlumniSIH/frontend/alumnologo.png" type="image/png">
+  <meta name="description" content="Premium subscription page with golden luxurious theme for Alumno" />
+  <style>
+    html {
+    scroll-behavior: smooth;
+  }
+    :root{
+      --bg:#0f0f0f; --card:#1a1a1a; --muted:#eeeeee; --accent1:#b78c00; --accent2:#ad950e; --glass: rgba(0, 0, 0, 0.06);
+      --radius:14px; --gutter:20px; --max-width:1100px;
+      --shadow: 0 6px 30px rgba(0,0,0,0.8);
+      font-synthesis: none;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background: radial-gradient(1000px 600px at 10% 10%, rgba(212,175,55,0.08), transparent), radial-gradient(1000px 600px at 90% 90%, rgba(255,215,0,0.06), transparent), var(--bg); color:#f5e9c9}
+    .wrap{max-width:var(--max-width);margin:48px auto;padding:32px;}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    h1{margin:0;font-size:22px;color:var(--accent1)}
+    p.lead{color:var(--muted);margin:6px 0 0;font-size:14px}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:stretch}
+    .panel{background:linear-gradient(180deg, rgba(255,215,0,0.06), transparent); padding:22px;border-radius:16px;box-shadow:var(--shadow);}
+
+    /* Plans area */
+    .plans{display:flex;gap:18px;flex-wrap:wrap}
+    .plan{flex:1 1 260px;background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(212,175,55,0.3);position:relative;overflow:hidden;transition:all .3s}
+    .plan:hover{box-shadow:0 0 20px rgba(212,175,55,0.4);transform:translateY(-4px)}
+    .plan.popular{border:2px solid var(--accent1);transform:translateY(-6px);box-shadow:0 12px 30px rgba(212,175,55,0.5)}
+    .ribbon{position:absolute;right:-34px;top:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:black;padding:6px 58px;transform:rotate(25deg);font-size:12px;font-weight:700}
+    .price{font-size:32px;font-weight:700;margin:8px 0;color:var(--accent2)}
+    .price small{font-weight:500;color:var(--muted);font-size:14px}
+    ul.features{list-style:none;padding:0;margin:12px 0 18px;color:var(--muted);line-height:1.6}
+    .cta{display:flex;gap:8px}
+    button.btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:black;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+    button.ghost{background:transparent;border:1px solid rgba(212,175,55,0.4);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
+
+    /* Sidebar */
+    .checkout{display:flex;flex-direction:column;gap:14px}
+    .toggle{display:flex;align-items:center;gap:8px;background:var(--glass);padding:8px;border-radius:999px;width:max-content}
+    .switch{position:relative;width:46px;height:26px;background:rgba(255,255,255,0.1);border-radius:999px;padding:3px;cursor:pointer}
+    .knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--accent1);transition:all .25s}
+    .switch.on{background:linear-gradient(90deg,var(--accent1),var(--accent2))}
+    .switch.on .knob{left:23px;background:black}
+
+    .summary{background:linear-gradient(180deg, rgba(212,175,55,0.06), transparent);padding:14px;border-radius:12px}
+    .summary h4{margin:0 0 6px;color:var(--accent2)}
+    .summary .line{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
+
+    footer.cards{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;padding:28px}
+    .modal.open{display:flex}
+    .modal .sheet{width:720px;max-width:100%;background:#111;padding:22px;border-radius:12px;border:1px solid var(--accent1)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;font-size:13px;margin-bottom:6px;color:var(--accent1)}
+    input[type=text],input[type=email],input[type=tel],select{width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(212,175,55,0.3);color:inherit}
+
+    @media (max-width:940px){.hero{grid-template-columns:1fr;}.brand h1{font-size:18px}}
+    @media (max-width:520px){.plans{flex-direction:column}.plan{min-width:0}}
+  </style>
+</head>
+<body>
+   <!-- Lenis -->
+  <script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    // Lenis setup
+    const lenis = new Lenis({
+      duration: 1.6,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+      smooth: true,
+      smoothTouch: true,
+      touchMultiplier: 2,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // GSAP ScrollTrigger animation
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from(".about", {
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      y: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power3.out"
+    });
+
+    gsap.from(".cta", {
+      scrollTrigger: {
+        trigger: ".cta",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      scale: 0.8,
+      opacity: 0,
+      duration: 1.5,
+      ease: "expo.out"
+    });
+  </script>
+  
+  <div class="btn-group">
+   <a href="index.html" class="btn btn-primary">Home</a>
+  </div>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">A</div>
+        <div>
+          <h1>Alumno Premium</h1>
+          <p class="lead">Unlock luxurious features — cancel anytime. Secure checkout & instant access.</p>
+        </div>
+      </div>
+      <nav aria-label="main">
+  <button class="btn" onclick="window.location.href='login.html'">Log in</button>
+  <button class="btn" onclick="openModal('monthly','starter')">Get Premium</button>
+</nav>
+    </header>
+
+    <section class="hero">
+      <div class="panel">
+        <h2 style="margin-top:0;color:var(--accent2)">Choose Your Premium Plan</h2>
+        <p class="small">Monthly and annual billing available — switch using the toggle on the right.</p>
+        <div style="height:18px"></div>
+        <div class="plans" id="plans">
+
+          <article class="plan popular" data-plan="starter" tabindex="0">
+            <div class="ribbon">Best Value</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <strong>Gold Plan</strong>
+                <div class="price"><span class="amount" data-month="149" data-year="1490">₹149</span><small>/mo</small></div>
+              </div>
+              <div style="text-align:right;color:var(--muted);font-size:12px">Perfect for individuals</div>
+            </div>
+            <ul class="features">
+              <li>Access to all Alumno features</li>
+              <li>Priority support</li>
+              <li>Sync across devices</li>
+            </ul>
+            <div class="cta">
+              <button class="btn" onclick="openModal(selectedCycle(),'starter')">Choose</button>
+              <button class="ghost" onclick="showDetails('starter')">Details</button>
+            </div>
+          </article>
+
+          <article class="plan" data-plan="pro" tabindex="0">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <strong>Platinum Plan</strong>
+                <div class="price"><span class="amount" data-month="299" data-year="2990">₹299</span><small>/mo</small></div>
+              </div>
+              <div style="text-align:right;color:var(--muted);font-size:12px">Ideal for professionals</div>
+            </div>
+            <ul class="features">
+              <li>Everything in gold</li>
+              <li>Dedicated account manager</li>
+              <li>Exclusive Alumno premium perks</li>
+            </ul>
+            <div class="cta">
+              <button class="btn" onclick="openModal(selectedCycle(),'pro')">Choose</button>
+              <button class="ghost" onclick="showDetails('pro')">Details</button>
+            </div>
+          </article>
+
+        </div>
+
+        <footer class="cards small">
+          <div>Secure payments • 30‑day money‑back</div>
+          <div>Trusted by 120k+ users</div>
+        </footer>
+      </div>
+
+      <aside class="panel checkout" aria-label="checkout">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <strong style="color:var(--accent1)">Billing</strong>
+            <div class="small">Choose monthly or yearly pricing</div>
+          </div>
+          <div class="toggle" title="Toggle billing cycle" onclick="toggleCycle()">
+            <span class="small">Monthly</span>
+            <div id="switch" class="switch" role="switch" aria-checked="true">
+              <div class="knob"></div>
+            </div>
+            <span class="small">Yearly</span>
+          </div>
+        </div>
+
+        <div class="summary" id="summary">
+          <h4>Selected</h4>
+          <div class="line"><div id="summary-plan">Gold Plan</div><div id="summary-price">₹149/mo</div></div>
+          <div style="height:8px"></div>
+          <div class="line"><div>Taxes</div><div id="summary-tax">Included</div></div>
+        </div>
+
+        <div style="display:flex;gap:10px">
+          <button class="btn" onclick="openModal(selectedCycle(),selectedPlan())">Checkout</button>
+          <button class="ghost" onclick="contactSales()">Contact sales</button>
+        </div>
+
+        <div style="margin-top:auto" class="small">By continuing you agree to the <a href="#">Terms</a> & <a href="#">Privacy</a>.</div>
+      </aside>
+    </section>
+  </div>
+
+  <!-- modal -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="sheet" role="document">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="margin:0;color:var(--accent2)">Complete purchase</h3>
+        <button class="ghost" onclick="closeModal()">Close</button>
+      </div>
+      <div class="small" style="margin-bottom:12px">Fill the details below to simulate a checkout. This sample page doesn't process real payments.</div>
+
+      <form id="checkout-form" onsubmit="event.preventDefault();finishPurchase();">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+          <div style="flex:1">
+            <label>Plan</label>
+            <input type="text" id="form-plan" readonly />
+          </div>
+          <div style="width:160px">
+            <label>Price</label>
+            <input type="text" id="form-price" readonly />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label>Full name</label>
+            <input type="text" id="name" required placeholder="Your name" />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" id="email" required placeholder="you@example.com" />
+          </div>
+          <div>
+            <label>Phone</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" />
+          </div>
+          <div>
+            <label>Country</label>
+            <select id="country"><option>India</option><option>United States</option></select>
+          </div>
+        </div>
+
+        <div style="height:14px"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button type="button" class="ghost" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn">Pay now</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let billingYearly = false;
+    let currentPlan = 'starter';
+
+    function selectedCycle(){return billingYearly ? 'yearly' : 'monthly'}
+    function selectedPlan(){return currentPlan}
+
+    document.addEventListener('click', e=>{
+      const p = e.target.closest('.plan');
+      if(p){ selectPlan(p.dataset.plan); }
+    });
+    selectPlan('starter');
+
+    function selectPlan(key){
+      currentPlan = key;
+      document.querySelectorAll('.plan').forEach(el=>el.classList.toggle('selected', el.dataset.plan===key));
+      updateSummary();
+    }
+
+    function toggleCycle(){
+      billingYearly = !billingYearly;
+      const sw = document.getElementById('switch');
+      sw.classList.toggle('on', billingYearly);
+      sw.setAttribute('aria-checked', billingYearly);
+      document.querySelectorAll('.plan .amount').forEach(a=>{
+        const m = a.dataset.month; const y = a.dataset.year;
+        a.textContent = billingYearly ? (Math.round(y/12)) : m;
+        a.parentNode.querySelector('small').textContent = billingYearly ? '/yr' : '/mo';
+      });
+      updateSummary();
+    }
+
+    function updateSummary(){
+      const planEl = document.querySelector(`.plan[data-plan="${currentPlan}"]`);
+      const amtEl = planEl.querySelector('.amount');
+      const price = amtEl.textContent + (billingYearly?'/yr':'/mo');
+      document.getElementById('summary-plan').textContent = planEl.querySelector('strong').textContent;
+      document.getElementById('summary-price').textContent = '₹'+price;
+      document.getElementById('form-plan').value = planEl.querySelector('strong').textContent + ' ('+ (billingYearly? 'Yearly' : 'Monthly') +')';
+      document.getElementById('form-price').value = '₹' + amtEl.textContent + (billingYearly? '/yr' : '/mo');
+    }
+
+    function openModal(cycle, plan){
+      if(plan) selectPlan(plan);
+      billingYearly = (cycle === 'yearly');
+      const sw = document.getElementById('switch');
+      sw.classList.toggle('on', billingYearly);
+      sw.setAttribute('aria-checked', billingYearly);
+      document.querySelectorAll('.plan .amount').forEach(a=>{
+        const m = a.dataset.month; const y = a.dataset.year;
+        a.textContent = billingYearly ? (Math.round(y/12)) : m;
+        a.parentNode.querySelector('small').textContent = billingYearly ? '/yr' : '/mo';
+      });
+      updateSummary();
+      document.getElementById('modal').classList.add('open');
+      document.getElementById('modal').setAttribute('aria-hidden','false');
+    }
+    function closeModal(){
+      document.getElementById('modal').classList.remove('open');
+      document.getElementById('modal').setAttribute('aria-hidden','true');
+    }
+    function finishPurchase(){
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      // simple fake success
+      closeModal();
+      alert(`Thank you ${name || 'user'}! A confirmation was sent to ${email || 'your email'}.`);
+    }
+
+    function showDetails(plan){
+      alert('Details for '+plan+' — includes features shown on the card.');
+    }
+    function openLogin(){alert('This is a placeholder for login flow.');}
+    function contactSales(){alert('Contact sales at sales@yourapp.example');}
+
+    function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1) }
+  </script>
+</body>
+</html>
